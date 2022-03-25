@@ -3,6 +3,7 @@ rule caddywipper_opcode
 	meta:
 		author = "Saulo 'Sal' Ortiz, Sr. Cyber Forensics Analyst, ATG"
 		description = "Single byte ASCII Move Opcode + HEX from Caddy Malware Used Against Ukraine - x32dbg"
+		reference  "https://github.com/ortizimo/find_caddywiper_opcode.yar/edit/main/code"
 		date = "2022-03-18"
 		md5 = "42e52b8daf63e6e26c3aa91e7e971492"
 		sha1 = "98b3fb74b3e8b3f9b05a82473551c5a77b576d54"
