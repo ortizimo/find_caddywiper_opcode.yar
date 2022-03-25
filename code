@@ -1,0 +1,127 @@
+rule caddywipper_opcode
+{					
+	meta:
+		author = "Saulo 'Sal' Ortiz, Sr. Cyber Forensics Analyst, ATG"
+		description = "Single byte ASCII Move Opcode + HEX from Caddy Malware Used Against Ukraine - x32dbg"
+		date = "2022-03-18"
+		md5 = "42e52b8daf63e6e26c3aa91e7e971492"
+		sha1 = "98b3fb74b3e8b3f9b05a82473551c5a77b576d54"
+		
+		note = "Did not remove the order numbers because it was too much to do."
+			
+	strings:
+		// DeviceIoControl @ 003d11ea
+		$a1 = {
+			c6 45 [??] 44               
+			c6 45 [??] 65                
+			c6 45 [??] 76                
+			c6 45 [??] 69                
+			c6 45 [??] 63                
+			c6 45 [??] 65                
+			c6 45 [??] 49                
+			c6 45 [??] 6f               
+			c6 45 [??] 43                
+			c6 45 [??] 6f                
+			c6 45 [??] 6e                
+			c6 45 [??] 74                
+			c6 45 [??] 72                
+			c6 45 [??] 6f                
+			c6 45 [??] 6c}
+		
+		// LookupPrivilegeValueA @ 003d17ec
+		$a2 = {
+			c6 45 [??] 4c
+			c6 45 [??] 6f 
+			c6 45 [??] 6f 
+			c6 45 [??] 6b  
+			c6 45 [??] 75 
+			c6 45 [??] 70 
+			C6 45 [??] 50 
+			C6 45 [??] 72
+			C6 45 [??] 69 
+			C6 45 [??] 76 
+			C6 45 [??] 69 
+			C6 45 [??] 6C
+			C6 45 [??] 65 
+			C6 45 [??] 67 
+			C6 45 [??] 65 
+			C6 45 [??] 56
+			C6 45 [??] 61 
+			C6 45 [??] 6c
+			C6 45 [??] 75 
+			C6 45 [??] 65
+			C6 45 [??] 41}
+		
+		// AdjustTokenPrivileges @ 003d1861
+		$a3 = {
+			C6 45 [??] 41 
+			C6 45 [??] 64 
+			C6 45 [??] 6A 
+			C6 45 [??] 75
+			C6 45 [??] 73 
+			C6 45 [??] 74 
+			C6 45 [??] 54 
+			C6 45 [??] 6F 
+			C6 45 [??] 6B 
+			C6 45 [??] 65 
+			C6 45 [??] 6E 
+			C6 45 [??] 50 
+			C6 45 [??] 72 
+			C6 45 [??] 69 
+			C6 45 [??] 76 
+			C6 45 [??] 69 
+			C6 45 [??] 6C 
+			C6 45 [??] 65 
+			C6 45 [??] 67 
+			C6 45 [??] 65 
+			C6 45 [??] 73}
+			
+		// SetEntriesInAclA @ 003d1b39
+		$a4 = {
+			C6 85 [??] FF FF FF 53 
+			C6 85 [??] FF FF FF 65 
+			C6 85 [??] FF FF FF 74 
+			C6 85 [??] FF FF FF 45 
+			C6 85 [??] FF FF FF 6E 
+			C6 85 [??] FF FF FF 74 
+			C6 85 [??] FF FF FF 72 
+			C6 85 [??] FF FF FF 69 
+			C6 85 [??] FF FF FF 65 
+			C6 85 [??] FF FF FF 73 
+			C6 85 [??] FF FF FF 49 
+			C6 85 [??] FF FF FF 6E 
+			C6 85 [??] FF FF FF 41 
+			C6 85 [??] FF FF FF 63 
+			C6 85 [??] FF FF FF 6C 
+			C6 85 [??] FF FF FF 41}
+	
+		// SeTakeOwnershipPrivilege @ 003d2025
+		$a5 = {
+			C6 85 [??] FF FF FF 53 
+			C6 85 [??] FF FF FF 65 
+			C6 85 [??] FF FF FF 54 
+			C6 85 [??] FF FF FF 61 
+			C6 85 [??] FF FF FF 6B 
+			C6 85 [??] FF FF FF 65 
+			C6 85 [??] FF FF FF 4F 
+			C6 85 [??] FF FF FF 77 
+			C6 85 [??] FF FF FF 6E 
+			C6 85 [??] FF FF FF 65 
+			C6 85 [??] FF FF FF 72 
+			C6 85 [??] FF FF FF 73 
+			C6 85 [??] FF FF FF 68 
+			C6 85 [??] FF FF FF 69 
+			C6 85 [??] FF FF FF 70 
+			C6 85 [??] FF FF FF 50 
+			C6 85 [??] FF FF FF 72 
+			C6 85 [??] FF FF FF 69 
+			C6 85 [??] FF FF FF 76 
+			C6 85 [??] FF FF FF 69 
+			C6 85 [??] FF FF FF 6C 
+			C6 85 [??] FF FF FF 65 
+			C6 85 [??] FF FF FF 67 
+			C6 85 [??] FF FF FF 65}
+	
+	condition:
+		all of them
+}
